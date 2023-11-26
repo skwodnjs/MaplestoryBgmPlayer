@@ -19,9 +19,10 @@ import java.util.Map;
 
 public class DataReceiver {
     public static final String site = "http://hiy9.net/ms-ost/";
-    public static String root = "C:/JWN3/music/maplestory0/";
+    public static String root = "C:/JWN3/music/maplestory";
     public static List<String> heads = new ArrayList<>();
     public static Map<String, List<BGMData>> bgm_map = new HashMap<>();
+    public static boolean makeSubDirectory = false;
 
     static {
         try {
@@ -56,7 +57,7 @@ public class DataReceiver {
 
     public static void downloadBgm() {
         bgm_map.forEach((head, bgmDataList) -> {
-            Path path = Paths.get(root + head.replaceAll("[\\\\/:*?\"<>|]", "-"));
+            Path path = Paths.get(root + (makeSubDirectory ? "/music/" : "") + head.replaceAll("[\\\\/:*?\"<>|]", "-"));
             if (Files.exists(path) && Files.isDirectory(path)) {
 //                System.out.println("디렉토리가 이미 존재합니다.");
             } else {
